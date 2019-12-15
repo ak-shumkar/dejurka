@@ -1,8 +1,6 @@
 package com.election.controller.api.v1;
 
-import com.election.assembler.datatable.UikResourceAssembler;
 import com.election.assembler.datatable.UserResourceAssembler;
-import com.election.assembler.datatable.VoterResourceAssembler;
 import com.election.dto.ApiResponse;
 import com.election.dto.UserDto;
 import com.election.model.User;
@@ -22,15 +20,11 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
-    private final VoterResourceAssembler voterResourceAssembler;
-    private final UikResourceAssembler uikResourceAssembler;
     private final UserResourceAssembler assembler;
 
     @Autowired
-    public UserController(UserService userService, VoterResourceAssembler voterResourceAssembler, UikResourceAssembler uikResourceAssembler, UserResourceAssembler assembler) {
+    public UserController(UserService userService, UserResourceAssembler assembler) {
         this.userService = userService;
-        this.voterResourceAssembler = voterResourceAssembler;
-        this.uikResourceAssembler = uikResourceAssembler;
         this.assembler = assembler;
     }
 
@@ -53,12 +47,7 @@ public class UserController {
         return assembler.toResources(userService.getAllByRole(roleId));
     }
 
-    @GetMapping ("voter-list/{agitator-id}")
-    public List<VoterResource> voterList(
-            @PathVariable(name = "agitator-id") Long agitatorId
-    ){
-        return voterResourceAssembler.toResources(userService.userVoterList(agitatorId));
-    }
+
 
     @PostMapping ("edit/{id}")
     public ResponseEntity<?> edit(
@@ -68,11 +57,6 @@ public class UserController {
         return new ResponseEntity<>(new ApiResponse(true, "UIK updated"), HttpStatus.OK);
     }
 
-    @GetMapping ("uik-list/{agitator-id}")
-    public List<UikResource> uikList(
-            @PathVariable(name = "agitator-id") Long userId
-    ){
-        return uikResourceAssembler.toResources(userService.userUikList(userId));
-    }
+
 
 }

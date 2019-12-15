@@ -22,17 +22,8 @@ public class SwaggerConfig {
                 .select()
                 .apis(RequestHandlerSelectors.any())
                 .paths(PathSelectors.any())
-                .build()
-                .apiInfo(apiInfo());
+                .build();
     }
 
-    private ApiInfo apiInfo() {
-        return new ApiInfo(
-                "ELECTION REST API",
-                "Some custom description of API.",
-                "API TOS",
-                "Terms of service",
-                new Contact("Elaman Nazarkulov", "www.elamann.kg", "physcom93@gmail.com"),
-                "License of API", "API license URL", Collections.emptyList());
-    }
+
 }
