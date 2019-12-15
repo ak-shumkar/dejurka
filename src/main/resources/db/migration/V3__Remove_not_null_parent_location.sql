@@ -1,0 +1,1 @@
+alter table ref_location alter column parent_id drop not null;
