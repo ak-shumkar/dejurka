@@ -1,0 +1,3 @@
+DROP TABLE ref_uik CASCADE;
+DROP TABLE voter CASCADE;
+DROP TABLE user_voter CASCADE;
