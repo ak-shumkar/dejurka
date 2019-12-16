@@ -1,9 +1,7 @@
 package com.apartment.service.user;
 
 import com.apartment.dto.UserDto;
-import com.apartment.model.Uik;
 import com.apartment.model.User;
-import com.apartment.model.Voter;
 
 import java.util.List;
 
@@ -25,9 +23,6 @@ public interface UserService {
 
     void edit(User src, UserDto target);
 
-    List<Uik> userUikList(Long userId);
-
-    List<Voter> userVoterList(Long userId);
 
     List<User> getAllByRole(Long roleId);
 

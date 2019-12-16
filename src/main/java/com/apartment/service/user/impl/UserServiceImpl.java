@@ -5,9 +5,7 @@ import com.apartment.model.*;
 import com.apartment.repository.LocationRepository;
 import com.apartment.repository.RoleRepository;
 import com.apartment.repository.UserRepository;
-import com.apartment.service.uik.UikService;
 import com.apartment.service.user.UserService;
-import com.apartment.service.voter.VoterService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,23 +24,18 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
     private final LocationRepository locationRepository;
     private final BCryptPasswordEncoder passwordEncoder;
-    private final UikService uikService;
-    private final VoterService voterService;
 
     @Autowired
     public UserServiceImpl(
             UserRepository userRepository,
             RoleRepository roleRepository,
             LocationRepository locationRepository,
-            BCryptPasswordEncoder passwordEncoder,
-            UikService uikService,
-            VoterService voterService) {
+            BCryptPasswordEncoder passwordEncoder
+      ) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.locationRepository = locationRepository;
         this.passwordEncoder = passwordEncoder;
-        this.uikService = uikService;
-        this.voterService = voterService;
     }
 
     @Override
@@ -120,15 +113,6 @@ public class UserServiceImpl implements UserService {
                );
     }
 
-    @Override
-    public List<Uik> userUikList(Long userId) {
-        return uikService.listByUser(userId);
-    }
-
-    @Override
-    public List<Voter> userVoterList(Long userId) {
-        return voterService.listByUser(userId);
-    }
 
     @Override
     public List<User> getAllByRole(Long roleId) {

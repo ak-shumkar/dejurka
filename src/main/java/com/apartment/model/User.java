@@ -44,11 +44,6 @@ public class User extends TimedEntity implements UserDetails, Selectable {
             inverseJoinColumns = {@JoinColumn(name = "role_id", referencedColumnName = "id")})
     private Set<Role> roles;
 
-    @ManyToMany
-    @JoinTable(name = "user_voter",
-            joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "voter_id", referencedColumnName = "id")})
-    private List<Voter> voters;
 
     @ManyToMany
     @JoinTable(name = "m2m_user_location_permission",
