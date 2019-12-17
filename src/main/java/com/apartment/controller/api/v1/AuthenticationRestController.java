@@ -30,7 +30,7 @@ import java.util.*;
  */
 
 @RestController
-@RequestMapping(value = "/api/v1/auth/")
+@RequestMapping(value = "/api/auth/")
 public class AuthenticationRestController {
 
     private final AuthenticationManager authenticationManager;

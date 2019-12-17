@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private final PasswordEncoder passwordEncoder;
 
     private static final String ADMIN_ENDPOINT = "/api/v1/admin/**";
-    private static final String AUTH_ENDPOINT = "/api/v1/auth/**";
+    private static final String AUTH_ENDPOINT = "/api/auth/**";
 
     @Autowired
     public SecurityConfig(
