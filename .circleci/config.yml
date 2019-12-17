@@ -1,0 +1,134 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:7
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+    steps:
+      - checkout
+  push-dev-server:
+    docker:
+      - image: circleci/node:7
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "d6:e7:51:ab:3b:18:4e:19:53:a5:bc:0f:1d:5c:4e:0c"
+      - deploy:
+          name: digital-ocean
+          command: ssh -o "StrictHostKeyChecking no" root@159.65.138.162 "systemctl restart backend.service"
+  push-prod-server:
+    docker:
+      - image: circleci/node:7
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "d6:e7:51:ab:3b:18:4e:19:53:a5:bc:0f:1d:5c:4e:0c"
+      - deploy:
+          name: digital-ocean
+          command: ssh -o "StrictHostKeyChecking no" root@159.65.138.162 "systemctl restart backend.service"
+  push-stage-server:
+    docker:
+      - image: circleci/node:7
+    environment:
+      DEBIAN_FRONTEND: noninteractive
+    steps:
+      - add_ssh_keys:
+          fingerprints:
+            - "d6:e7:51:ab:3b:18:4e:19:53:a5:bc:0f:1d:5c:4e:0c"
+      - deploy:
+          name: digital-ocean
+          command: ssh -o "StrictHostKeyChecking no" root@159.65.138.162 "systemctl restart backend.service"
+  deploy-dev-server:
+    docker:
+      - image: circleci/node:7
+    steps:
+      - checkout
+  deploy-prod-server:
+    docker:
+      - image: circleci/node:7
+    steps:
+      - checkout
+  deploy-stage-server:
+    docker:
+      - image: circleci/node:7
+    steps:
+      - checkout
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - dev
+                - master
+                - stage
+  dev_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - dev
+      - push-dev-server:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - dev
+      - deploy-dev-server:
+          requires:
+            - push-dev-server
+          filters:
+            branches:
+              only:
+                - dev
+  stage_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - stage
+      - push-stage-server:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - stage
+      - deploy-stage-server:
+          requires:
+            - push-stage-server
+          filters:
+            branches:
+              only:
+                - stage
+  prod_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+      - push-prod-server:
+          requires:
+            - build
+          filters:
+            branches:
+              only:
+                - master
+      - deploy-prod-server:
+          requires:
+            - push-prod-server
+          filters:
+            branches:
+              only:
+                - master
