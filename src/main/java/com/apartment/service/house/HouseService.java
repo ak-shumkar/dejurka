@@ -60,4 +60,9 @@ public class HouseService  {
     public Page<House> findAll(Pageable pageable){
         return houseRepository.findAll(pageable);
     }
+
+    public Boolean delete(House house){
+        houseRepository.delete(house);
+        return true;
+    }
 }

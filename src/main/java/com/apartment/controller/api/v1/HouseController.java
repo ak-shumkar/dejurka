@@ -15,6 +15,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.querydsl.binding.QuerydslPredicate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,7 +23,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/house/")
+@RequestMapping(value = "/api/v1/house")
 public class HouseController {
 
     private final HouseService houseService;
@@ -34,7 +35,7 @@ public class HouseController {
     }
 
 
-    @PostMapping ("create")
+    @PostMapping ("/create")
     public ResponseEntity<?> create(
             @RequestPart(name = "file") MultipartFile[] files,
             @ModelAttribute HouseDto houseDto
@@ -44,13 +45,13 @@ public class HouseController {
         return new ResponseEntity<>(new ApiResponse(true, "New House added"), HttpStatus.OK);
     }
 
-    @PostMapping ("edit/{id}")
+    @PostMapping ("/edit/{id}")
     public ResponseEntity<?> update(@RequestBody HouseDto houseDto, @PathVariable (name = "id") House house){
         houseService.update(houseDto, house);
         return new ResponseEntity<>(new ApiResponse(true, "House updated"), HttpStatus.OK);
     }
 
-    @GetMapping (value = "{id}")
+    @GetMapping (value = "/{id}")
     public HouseResource findById(@PathVariable (name = "id") Long id){
 
         return assembler.toResource(houseService.findById(id));
@@ -60,5 +61,13 @@ public class HouseController {
     public List<HouseResource> list(Pageable pageable) {
 
         return assembler.toResources(houseService.findAll(pageable));
+    }
+
+    @DeleteMapping
+    public Boolean delete(
+            @RequestParam("id") House house
+    ) {
+        this.houseService.delete(house);
+        return true;
     }
 }
