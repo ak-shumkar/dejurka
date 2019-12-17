@@ -15,7 +15,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "25:3c:42:ea:76:56:5e:09:d5:88:14:72:f7:cb:97:e5"
+            - "d6:e7:51:ab:3b:18:4e:19:53:a5:bc:0f:1d:5c:4e:0c"
       - deploy:
           name: digital-ocean
           command: ssh -o "StrictHostKeyChecking no" root@159.65.138.162 "systemctl restart backend.service"
@@ -27,7 +27,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "25:3c:42:ea:76:56:5e:09:d5:88:14:72:f7:cb:97:e5"
+            - "d6:e7:51:ab:3b:18:4e:19:53:a5:bc:0f:1d:5c:4e:0c"
       - deploy:
           name: digital-ocean
           command: ssh -o "StrictHostKeyChecking no" root@159.65.138.162 "systemctl restart backend.service"
@@ -39,7 +39,7 @@ jobs:
     steps:
       - add_ssh_keys:
           fingerprints:
-            - "25:3c:42:ea:76:56:5e:09:d5:88:14:72:f7:cb:97:e5"
+            - "d6:e7:51:ab:3b:18:4e:19:53:a5:bc:0f:1d:5c:4e:0c"
       - deploy:
           name: digital-ocean
           command: ssh -o "StrictHostKeyChecking no" root@159.65.138.162 "systemctl restart backend.service"
