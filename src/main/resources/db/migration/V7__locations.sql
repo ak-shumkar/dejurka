@@ -1,0 +1,46 @@
+INSERT INTO ref_location (created_at, title, parent_id,location_level)
+VALUES
+  (now(), 'Бишкек', null ,1);
+
+INSERT INTO ref_location
+  (created_at, title, parent_id,location_level)
+VALUES
+  (now(), '3 - микрорайон',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Пишпек',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Арча Бешик',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Юбилейка',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Аламедин-1 ',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Асанбай',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Нижний джал',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Средний джал',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Верхний джал',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Тунгуч',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Микрорайон Көкжар ',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Жилой массив Көкжар',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Восток - 5',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Келечек',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), '12 - микрорайон',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Кара Жыгач',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), '7 - микрорайон',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), '6 - микрорайон',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), '8 - микрорайон',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Рабочий городок',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), '5 - микрорайон',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), '10 - микрорайон',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Чон Арык',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Улан - 2',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), '4 - микрорайон',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Киргизия - 1',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Улан',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Учкун',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Городок строителей',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), '9 - микрорайон',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Жилгородок Совмина',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), '110 Квартал',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Керемет',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Достук',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Ынтымак',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Юг-2',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), '11 - микрорайон',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Мырза Аки',	(select id from ref_location where title='Бишкек'), 2),
+  (now(), 'Касым',	(select id from ref_location where title='Бишкек'), 2);
