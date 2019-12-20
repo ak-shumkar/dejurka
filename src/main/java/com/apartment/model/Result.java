@@ -6,9 +6,9 @@ import lombok.Data;
 public class Result {
     Long rank;
     String name;
-    Long solved;
+    Integer solved;
 
-    public Result(Long rank,String name, Long solved) {
+    public Result(Long rank,String name, Integer solved) {
         this.rank = rank;
         this.name = name;
         this.solved = solved;

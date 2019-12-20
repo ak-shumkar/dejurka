@@ -1,16 +1,13 @@
 package com.apartment.controller.api.v1;
 
+import com.apartment.model.Rank;
 import com.apartment.model.Result;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
+import com.apartment.repository.RankRepository;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
@@ -18,19 +15,22 @@ import java.util.List;
 @RequestMapping(value = "/api/v1/ranklist/")
 public class LeetCodeController {
 
-    @GetMapping
-    public List<Result> list() throws IOException {
-        List<String> users = Arrays.asList("emli", "abdykaparkamilov", "zubaidullo","kalandar","smilerik","BekbolotovBolot","wwormich","ADJA","mbek","justlive","mfv");
+    private final RankRepository rankRepository;
 
+    public LeetCodeController(RankRepository rankRepository) {
+        this.rankRepository = rankRepository;
+    }
+
+    @GetMapping
+    public List<Result> list() {
         List<Result> ranklist = new ArrayList<>();
 
+        List<Rank> ranks = rankRepository.findAll();
+
         Long order = 1L;
-        for(String user : users) {
 
-            Document doc = Jsoup.parse(new URL("https://leetcode.com/" + user), 20000);
-
-            String[] text= doc.getElementsContainingText("Solved Question").get(10).text().split("/");
-            ranklist.add(new Result(0L,user, Long.parseLong(text[0].trim())));
+        for(Rank rank : ranks) {
+            ranklist.add(new Result(0L,rank.getUsername(), rank.getSolved()));
         }
 
         ranklist.sort(Comparator.comparing(Result::getSolved).reversed());
