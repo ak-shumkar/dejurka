@@ -24,7 +24,7 @@ public class LeetCodeController {
 
         List<Result> ranklist = new ArrayList<>();
 
-        Long order = 1L;//
+        Long order = 1L;
         for(String user : users) {
 
             Document doc = Jsoup.parse(new URL("https://leetcode.com/" + user), 20000);
