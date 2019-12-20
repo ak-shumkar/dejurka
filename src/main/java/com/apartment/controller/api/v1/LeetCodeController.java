@@ -1,25 +1,18 @@
 package com.apartment.controller.api.v1;
 
-import com.apartment.assembler.datatable.UserResourceAssembler;
-import com.apartment.dto.ApiResponse;
-import com.apartment.dto.UserDto;
 import com.apartment.model.Result;
-import com.apartment.model.User;
-import com.apartment.resource.datatable.UserResource;
-import com.apartment.service.user.UserService;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
 
 @RestController
 @RequestMapping(value = "/api/v1/ranklist/")
@@ -31,7 +24,7 @@ public class LeetCodeController {
 
         List<Result> ranklist = new ArrayList<>();
 
-        Long order = 1L;
+        Long order = 1L;//
         for(String user : users) {
 
             Document doc = Jsoup.parse(new URL("https://leetcode.com/" + user), 20000);
