@@ -27,7 +27,7 @@ public class LeetCodeController {
 
     @GetMapping
     public List<Result> list() throws IOException {
-        List<String> users = Arrays.asList("emli", "abdykaparkamilov", "zubaidullo","kalandar","smilerik","BekbolotovBolot","wwormich","ADJA","mbek");
+        List<String> users = Arrays.asList("emli", "abdykaparkamilov", "zubaidullo","kalandar","smilerik","BekbolotovBolot","wwormich","ADJA","mbek","justlive");
 
         List<Result> ranklist = new ArrayList<>();
 
