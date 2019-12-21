@@ -20,7 +20,6 @@ public class UserDto {
     private String password;
     private Boolean enabled;
     private List<Long> roles;
-    private List<Long> locations;
 
 
     public User toUser(UserDto userDto){
@@ -45,7 +44,6 @@ public class UserDto {
         userDto.setEmail(user.getEmail());
         userDto.setRoles(user.getRoles().stream().map(r->{return r.getId();}).collect(Collectors.toList()));
         userDto.setEnabled(user.isEnabled());
-        userDto.setLocations(user.getLocations().stream().map(l->{return l.getId();}).collect(Collectors.toList()));
 
         return userDto;
     }
