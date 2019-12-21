@@ -88,6 +88,9 @@ public class AuthenticationRestController {
             response.put("username", username);
             response.put("roles", roleDtos);
             response.put("token", token);
+            response.put("name", user.getFirstName());
+            response.put("surname", user.getLastName());
+
 
             return ResponseEntity.ok(response);
         } catch (AuthenticationException e) {
