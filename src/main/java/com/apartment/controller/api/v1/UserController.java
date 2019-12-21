@@ -57,6 +57,14 @@ public class UserController {
         return new ResponseEntity<>(new ApiResponse(true, "UIK updated"), HttpStatus.OK);
     }
 
+    @DeleteMapping
+    public Boolean delete(
+            @RequestParam("id") Long id
+    ) {
+        this.userService.delete(id);
+        return true;
+    }
+
 
 
 }
