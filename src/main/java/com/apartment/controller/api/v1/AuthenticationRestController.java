@@ -108,7 +108,7 @@ public class AuthenticationRestController {
             return new ResponseEntity<>(new ApiResponse(false, "Email Address already in use!"), HttpStatus.BAD_REQUEST);
         }
 
-        User user = new User(userRegisterDto.getUsername(), userRegisterDto.getName(), userRegisterDto.getUsername(), userRegisterDto.getEmail());
+        User user = new User(userRegisterDto.getUsername(), userRegisterDto.getName(), userRegisterDto.getSurname(), userRegisterDto.getEmail());
 
         user.setPassword(userRegisterDto.getPassword());
         user.setEnabled(true);

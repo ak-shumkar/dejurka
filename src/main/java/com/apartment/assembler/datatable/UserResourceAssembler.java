@@ -1,16 +1,21 @@
 package com.apartment.assembler.datatable;
 
 import com.apartment.controller.api.v1.UserController;
+import com.apartment.model.Role;
 import com.apartment.model.User;
+import com.apartment.resource.datatable.RoleResource;
 import com.apartment.resource.datatable.UserResource;
 import org.springframework.stereotype.Component;
 
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class UserResourceAssembler extends DataTableResourceAssembler<User, UserResource> {
-    public UserResourceAssembler() {
+    private final RoleResourceAssembler roleResourceAssembler;
+    public UserResourceAssembler(RoleResourceAssembler roleResourceAssembler) {
         super(UserController.class, UserResource.class);
+        this.roleResourceAssembler = roleResourceAssembler;
     }
 
     @Override
@@ -19,9 +24,15 @@ public class UserResourceAssembler extends DataTableResourceAssembler<User, User
         resource.setFirstName(user.getFirstName());
         resource.setLastName(user.getLastName());
         resource.setEmail(user.getEmail());
-        resource.setLocations(user.getLocations().stream().map(l->{return l.getTitle();}).collect(Collectors.toList()));
+        resource.setUsername(user.getUsername());
         resource.setBaseId(user.getId());
         resource.setEnabled(user.isEnabled());
+        List<RoleResource> roleResourceList = new ArrayList<>();
+
+        for(Role role : user.getRoles()){
+            roleResourceList.add(roleResourceAssembler.toResource(role));
+        }
+        resource.setResources(roleResourceList);
         return resource;
     }
 }

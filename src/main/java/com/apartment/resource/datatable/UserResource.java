@@ -10,7 +10,8 @@ public class UserResource extends BaseResource {
 
     private String firstName;
     private String lastName;
+    private String username;
     private String email;
     private Boolean enabled;
-    private List<String> locations;
+    private List<RoleResource> resources;
 }

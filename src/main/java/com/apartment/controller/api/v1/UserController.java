@@ -1,5 +1,6 @@
 package com.apartment.controller.api.v1;
 
+import com.apartment.assembler.datatable.RoleResourceAssembler;
 import com.apartment.assembler.datatable.UserResourceAssembler;
 import com.apartment.dto.ApiResponse;
 import com.apartment.dto.UserDto;
@@ -20,8 +21,9 @@ public class UserController {
     private final UserService userService;
     private final UserResourceAssembler assembler;
 
+
     @Autowired
-    public UserController(UserService userService, UserResourceAssembler assembler) {
+    public UserController(UserService userService, UserResourceAssembler assembler, RoleResourceAssembler resourceAssembler) {
         this.userService = userService;
         this.assembler = assembler;
     }
