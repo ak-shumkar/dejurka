@@ -1,7 +1,9 @@
 package com.apartment.service.user.impl;
 
 import com.apartment.dto.UserDto;
-import com.apartment.model.*;
+import com.apartment.model.Location;
+import com.apartment.model.Role;
+import com.apartment.model.User;
 import com.apartment.repository.LocationRepository;
 import com.apartment.repository.RoleRepository;
 import com.apartment.repository.UserRepository;
@@ -92,14 +94,7 @@ public class UserServiceImpl implements UserService {
         }
         if(roles.size() > 0)
             src.setRoles(roles);
-
-        // LOCATIONS
-        for(Long locationId: target.getLocations()){
-            locations.add(locationRepository.findById(locationId).orElse(null));
-        }
-        if(locations.size()>0)
-            src.setLocations(locations);
-
+        
         //CHECK FOR PASSWORD
         if(!StringUtils.isEmpty(target.getPassword())){
             src.setPassword(passwordEncoder.encode(target.getPassword()));
