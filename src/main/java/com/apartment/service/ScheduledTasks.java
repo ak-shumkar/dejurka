@@ -25,10 +25,13 @@ public class ScheduledTasks {
      List<Rank> rankList = rankRepository.findAll();
 
      for(Rank rank : rankList){
-       Document doc = Jsoup.parse(new URL("https://leetcode.com/" + rank.getUsername()), 20000);
-
-       String[] text= doc.getElementsContainingText("Solved Question").get(10).text().split("/");
-       rank.setSolved(Integer.parseInt(text[0].trim()));
+         try {
+             Document doc = Jsoup.parse(new URL("https://leetcode.com/" + rank.getUsername()), 20000);
+             String[] text= doc.getElementsContainingText("Solved Question").get(10).text().split("/");
+             rank.setSolved(Integer.parseInt(text[0].trim()));
+         }catch (Exception e){
+             System.out.println("Couldn't update " + rank.getUsername());
+         }
        rankRepository.save(rank);
      }
   }
