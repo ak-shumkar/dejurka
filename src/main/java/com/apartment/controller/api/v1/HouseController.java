@@ -2,21 +2,17 @@ package com.apartment.controller.api.v1;
 
 
 import com.apartment.assembler.datatable.HouseResourceAssembler;
+import com.apartment.assembler.datatable.LocationResourceAssembler;
 import com.apartment.dto.ApiResponse;
 import com.apartment.dto.HouseDto;
-import com.apartment.dto.LocationDto;
 import com.apartment.model.House;
-import com.apartment.model.Location;
 import com.apartment.resource.datatable.HouseResource;
-import com.apartment.resource.datatable.LocationResource;
 import com.apartment.service.house.HouseService;
-import com.querydsl.core.types.Predicate;
 import org.springframework.data.domain.Pageable;
-import org.springframework.data.querydsl.binding.QuerydslPredicate;
+import org.springframework.data.web.PagedResourcesAssembler;
+import org.springframework.hateoas.PagedResources;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,10 +24,13 @@ public class HouseController {
 
     private final HouseService houseService;
     private final HouseResourceAssembler assembler;
+    private final LocationResourceAssembler locationResourceAssembler;
 
-    public HouseController(HouseService houseService, HouseResourceAssembler assembler) {
+
+    public HouseController(HouseService houseService, HouseResourceAssembler assembler, LocationResourceAssembler locationResourceAssembler) {
         this.houseService = houseService;
         this.assembler = assembler;
+        this.locationResourceAssembler = locationResourceAssembler;
     }
 
 
@@ -61,6 +60,12 @@ public class HouseController {
     public List<HouseResource> list(Pageable pageable) {
 
         return assembler.toResources(houseService.findAll(pageable));
+    }
+
+    @GetMapping("/filter")
+    public PagedResources<HouseResource> filter(PagedResourcesAssembler<House> pagedAssembler, @RequestBody HouseDto houseDto, Pageable pageable) {
+
+        return pagedAssembler.toResource(houseService.filter(houseDto,pageable),new HouseResourceAssembler(locationResourceAssembler));
     }
 
     @DeleteMapping

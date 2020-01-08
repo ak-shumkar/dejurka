@@ -4,9 +4,11 @@ import com.apartment.dto.HouseDto;
 import com.apartment.model.House;
 import com.apartment.model.Image;
 import com.apartment.model.Location;
+import com.apartment.model.QHouse;
 import com.apartment.repository.HouseRepository;
 import com.apartment.service.FileStorageService;
 import com.apartment.service.location.LocationService;
+import com.querydsl.core.BooleanBuilder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -17,6 +19,7 @@ import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class HouseService  {
@@ -59,6 +62,41 @@ public class HouseService  {
 
     public Page<House> findAll(Pageable pageable){
         return houseRepository.findAll(pageable);
+    }
+
+    public Page<House> filter(HouseDto houseDto,Pageable pageable){
+        final QHouse root = QHouse.house;
+        final BooleanBuilder builder = new BooleanBuilder();
+
+        if(Objects.nonNull(houseDto.getLocationId()))
+            builder.and(root.location.id.eq(houseDto.getLocationId()));
+        if (Objects.nonNull(houseDto.getAddress()))
+            builder.and(root.address.eq(houseDto.getAddress()));
+        if (Objects.nonNull(houseDto.getArea()))
+            builder.and(root.area.eq(houseDto.getArea()));
+        if (Objects.nonNull(houseDto.getCurrency()))
+            builder.and(root.currency.eq(houseDto.getCurrency()));
+        if (Objects.nonNull(houseDto.getDescription()))
+            builder.and(root.description.eq(houseDto.getDescription()));
+        if (Objects.nonNull(houseDto.getHouseNumber()))
+            builder.and(root.houseNumber.eq(houseDto.getHouseNumber()));
+        if (Objects.nonNull(houseDto.getHouseType()))
+            builder.and(root.houseType.eq(houseDto.getHouseType()));
+        if (Objects.nonNull(houseDto.getMarketType()))
+            builder.and(root.marketType.eq(houseDto.getMarketType()));
+        if (Objects.nonNull(houseDto.getPhoneNumber()))
+            builder.and(root.phoneNumber.eq(houseDto.getPhoneNumber()));
+        if (Objects.nonNull(houseDto.getRooms()))
+            builder.and(root.rooms.eq(houseDto.getRooms()));
+        if (Objects.nonNull(houseDto.getPrice()))
+            builder.and(root.price.eq(houseDto.getPrice()));
+        if (Objects.nonNull(houseDto.getTitle()))
+            builder.and(root.title.eq(houseDto.getTitle()));
+
+        if(Objects.nonNull(builder.getValue()))
+            return this.houseRepository.findAll(Objects.requireNonNull(builder.getValue()),pageable);
+        else
+            return this.houseRepository.findAll(pageable);
     }
 
     public Boolean delete(House house){
