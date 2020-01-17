@@ -62,7 +62,7 @@ public class HouseController {
         return assembler.toResources(houseService.findAll(pageable));
     }
 
-    @GetMapping("/filter")
+    @PostMapping("/filter")
     public PagedResources<HouseResource> filter(PagedResourcesAssembler<House> pagedAssembler, @RequestBody HouseDto houseDto, Pageable pageable) {
 
         return pagedAssembler.toResource(houseService.filter(houseDto,pageable),new HouseResourceAssembler(locationResourceAssembler));
