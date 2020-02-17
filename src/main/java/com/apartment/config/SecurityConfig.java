@@ -39,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private static final String ADMIN_ENDPOINT = "/api/v1/admin/**";
     private static final String AUTH_ENDPOINT = "/api/auth/**";
     private static final String RANKLIST_ENDPOINT = "/api/v1/ranklist/";
+    private static final String ALLOW = "/api/**";
 
 
     @Autowired
@@ -88,6 +89,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/v2/api-docs", "/configuration/**", "/swagger*/**", "/webjars/**")
                 .permitAll()
                 .antMatchers(AUTH_ENDPOINT).permitAll()
+                .antMatchers(ALLOW).permitAll()
                 .antMatchers(RANKLIST_ENDPOINT).permitAll()
                 .antMatchers(ADMIN_ENDPOINT).hasRole("ADMIN")
                 .anyRequest().authenticated()
