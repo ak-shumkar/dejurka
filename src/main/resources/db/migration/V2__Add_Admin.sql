@@ -17,8 +17,8 @@ values (
    'admin',
    crypt('123456', gen_salt('bf', 8)),
    'Администратор',
-   'Apartment.kg',
-   'admin@test.kg',
+   'dejurka',
+   'dejurka@test.kg',
    true);
 
 
