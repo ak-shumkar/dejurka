@@ -39,6 +39,9 @@ public class House extends TimedEntity implements Selectable {
     @Column(name = "rooms")
     private Integer rooms;
 
+    @Column(name = "series")
+    private Integer series;
+
     @Column(name = "market_type")
     private Integer marketType;
 
@@ -54,8 +57,23 @@ public class House extends TimedEntity implements Selectable {
     @Column(name = "price")
     private Integer price;
 
+    @Column(name = "price_full")
+    private Integer priceFull;
+
     @Column(name = "currency")
     private String currency;
+
+    @Column(name = "floor")
+    private String floor;
+
+    @Column(name = "floor_full")
+    private String floorFull;
+
+    @Column(name = "name_owner")
+    private String nameOwner;
+
+    @Column(name = "name_contract")
+    private String nameContract;
 
     @Column(name = "phone_number")
     private String phoneNumber;

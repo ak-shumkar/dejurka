@@ -15,11 +15,17 @@ public class HouseDto {
     private String address;
     private String description;
     private Integer rooms;
+    private Integer series;
     private Integer marketType;
     private Integer houseType;
     private String houseNumber;
     private String area;
     private Integer price;
+    private Integer priceFull;
     private String currency;
     private String phoneNumber;
+    private String floor;
+    private String floorFull;
+    private String nameOwner;
+    private String nameContract;
 }

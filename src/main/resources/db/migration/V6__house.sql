@@ -6,14 +6,20 @@ CREATE TABLE IF NOT EXISTS house (
     title      VARCHAR(255),
     address    VARCHAR(255),
     dsc   VARCHAR(255),
+    series  smallint,
     rooms smallint,
     market_type smallint,
     house_type smallint,
     house_number VARCHAR(255),
     area   VARCHAR(255),
     price   BIGINT,
+    price_full   BIGINT,
     currency   VARCHAR(255),
-    phone_number   VARCHAR(255)
+    phone_number   VARCHAR(255),
+    floor VARCHAR(255),
+    floor_full VARCHAR(255),
+    name_owner VARCHAR(255),
+    name_contract VARCHAR(255)
 );
 
 CREATE TABLE IF NOT EXISTS image (

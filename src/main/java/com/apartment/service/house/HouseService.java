@@ -92,7 +92,23 @@ public class HouseService  {
             builder.and(root.price.eq(houseDto.getPrice()));
         if (Objects.nonNull(houseDto.getTitle()))
             builder.and(root.title.eq(houseDto.getTitle()));
+        if (Objects.nonNull(houseDto.getSeries()))
+            builder.and(root.series.eq(houseDto.getSeries()));
 
+        if (Objects.nonNull(houseDto.getPriceFull()))
+            builder.and(root.priceFull.eq(houseDto.getPriceFull()));
+
+        if (Objects.nonNull(houseDto.getFloor()))
+            builder.and(root.floor.eq(houseDto.getFloor()));
+
+        if (Objects.nonNull(houseDto.getFloorFull()))
+            builder.and(root.floorFull.eq(houseDto.getFloorFull()));
+
+        if (Objects.nonNull(houseDto.getNameOwner()))
+            builder.and(root.floorFull.eq(houseDto.getNameOwner()));
+
+        if (Objects.nonNull(houseDto.getNameContract()))
+            builder.and(root.floorFull.eq(houseDto.getNameContract()));
         if(Objects.nonNull(builder.getValue()))
             return this.houseRepository.findAll(Objects.requireNonNull(builder.getValue()),pageable);
         else
