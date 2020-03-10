@@ -22,4 +22,10 @@ public class HouseResource extends BaseResource {
     private String currency;
     private String phoneNumber;
     private List<Image> images;
+    private Integer series;
+    private Integer priceFull;
+    private String floor;
+    private String floorFull;
+    private String nameOwner;
+    private String nameContract;
 }
