@@ -15,7 +15,7 @@ public class HouseDto {
     private String address;
     private String description;
     private Integer rooms;
-    private Integer series;
+    private String series;
     private Integer marketType;
     private Integer houseType;
     private String houseNumber;

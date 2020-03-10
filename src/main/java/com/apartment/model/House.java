@@ -40,7 +40,7 @@ public class House extends TimedEntity implements Selectable {
     private Integer rooms;
 
     @Column(name = "series")
-    private Integer series;
+    private String series;
 
     @Column(name = "market_type")
     private Integer marketType;
