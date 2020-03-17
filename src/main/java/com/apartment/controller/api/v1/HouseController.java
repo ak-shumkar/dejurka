@@ -3,6 +3,7 @@ package com.apartment.controller.api.v1;
 
 import com.apartment.assembler.datatable.HouseResourceAssembler;
 import com.apartment.assembler.datatable.LocationResourceAssembler;
+import com.apartment.assembler.datatable.SeriesResourceAssembler;
 import com.apartment.dto.ApiResponse;
 import com.apartment.dto.HouseDto;
 import com.apartment.model.House;
@@ -25,12 +26,14 @@ public class HouseController {
     private final HouseService houseService;
     private final HouseResourceAssembler assembler;
     private final LocationResourceAssembler locationResourceAssembler;
+    private final SeriesResourceAssembler seriesResourceAssembler;
 
 
-    public HouseController(HouseService houseService, HouseResourceAssembler assembler, LocationResourceAssembler locationResourceAssembler) {
+    public HouseController(HouseService houseService, HouseResourceAssembler assembler, LocationResourceAssembler locationResourceAssembler, SeriesResourceAssembler seriesResourceAssembler) {
         this.houseService = houseService;
         this.assembler = assembler;
         this.locationResourceAssembler = locationResourceAssembler;
+        this.seriesResourceAssembler = seriesResourceAssembler;
     }
 
 
@@ -65,7 +68,7 @@ public class HouseController {
     @PostMapping("/filter")
     public PagedResources<HouseResource> filter(PagedResourcesAssembler<House> pagedAssembler, @RequestBody HouseDto houseDto, Pageable pageable) {
 
-        return pagedAssembler.toResource(houseService.filter(houseDto,pageable),new HouseResourceAssembler(locationResourceAssembler));
+        return pagedAssembler.toResource(houseService.filter(houseDto,pageable),new HouseResourceAssembler(locationResourceAssembler, seriesResourceAssembler));
     }
 
     @DeleteMapping

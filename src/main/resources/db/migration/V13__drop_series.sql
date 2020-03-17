@@ -1,0 +1,1 @@
+alter table house drop column IF EXISTS series;

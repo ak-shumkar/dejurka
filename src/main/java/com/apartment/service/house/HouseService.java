@@ -1,13 +1,11 @@
 package com.apartment.service.house;
 
 import com.apartment.dto.HouseDto;
-import com.apartment.model.House;
-import com.apartment.model.Image;
-import com.apartment.model.Location;
-import com.apartment.model.QHouse;
+import com.apartment.model.*;
 import com.apartment.repository.HouseRepository;
 import com.apartment.service.FileStorageService;
 import com.apartment.service.location.LocationService;
+import com.apartment.service.series.SeriesService;
 import com.querydsl.core.BooleanBuilder;
 import org.springframework.beans.BeanUtils;
 import org.springframework.data.domain.Page;
@@ -27,12 +25,14 @@ public class HouseService  {
     private final LocationService locationService;
     private final HouseRepository houseRepository;
     private final FileStorageService fileStorageService;
+    private final SeriesService seriesService;
 
 
-    protected HouseService(LocationService locationService, HouseRepository houseRepository, FileStorageService fileStorageService) {
+    protected HouseService(LocationService locationService, HouseRepository houseRepository, FileStorageService fileStorageService, SeriesService seriesService) {
         this.locationService = locationService;
         this.houseRepository = houseRepository;
         this.fileStorageService = fileStorageService;
+        this.seriesService = seriesService;
     }
 
     public House create(@NotNull HouseDto houseDto, MultipartFile[] images) throws Exception {
@@ -51,8 +51,10 @@ public class HouseService  {
 
     public House createAndUpdate(HouseDto houseDto,House house){
         Location location = locationService.findById(houseDto.getLocationId());
+        Series series = seriesService.findById(houseDto.getSeriesId());
         BeanUtils.copyProperties(houseDto, house,"locationId");
         house.setLocation(location);
+        house.setSeries(series);
         return houseRepository.save(house);
     }
 
@@ -92,8 +94,8 @@ public class HouseService  {
             builder.and(root.price.eq(houseDto.getPrice()));
         if (Objects.nonNull(houseDto.getTitle()))
             builder.and(root.title.eq(houseDto.getTitle()));
-        if (Objects.nonNull(houseDto.getSeries()))
-            builder.and(root.series.eq(houseDto.getSeries()));
+        if (Objects.nonNull(houseDto.getSeriesId()))
+            builder.and(root.series.id.eq(houseDto.getSeriesId()));
 
         if (Objects.nonNull(houseDto.getPriceFull()))
             builder.and(root.priceFull.eq(houseDto.getPriceFull()));

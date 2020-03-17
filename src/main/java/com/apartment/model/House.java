@@ -39,8 +39,9 @@ public class House extends TimedEntity implements Selectable {
     @Column(name = "rooms")
     private Integer rooms;
 
-    @Column(name = "series")
-    private String series;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "series_id", referencedColumnName = "id")
+    private Series series;
 
     @Column(name = "market_type")
     private Integer marketType;

@@ -11,6 +11,7 @@ import java.util.List;
 public class HouseResource extends BaseResource {
     private String title;
     private LocationResource locationResource;
+    private SeriesResource seriesResource;
     private String address;
     private String description;
     private Integer rooms;
@@ -22,7 +23,6 @@ public class HouseResource extends BaseResource {
     private String currency;
     private String phoneNumber;
     private List<Image> images;
-    private String series;
     private Integer priceFull;
     private String floor;
     private String floorFull;
