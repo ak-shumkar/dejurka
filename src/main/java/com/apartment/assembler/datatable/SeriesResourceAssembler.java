@@ -18,6 +18,9 @@ public class SeriesResourceAssembler extends DataTableResourceAssembler<Series, 
     @Override
     public SeriesResource toResource(Series series) {
 
+        if (series == null){
+            return null;
+        }
         SeriesResource resource = createResourceWithId(series.getId(), series);
 
         resource.setName(series.getName());
