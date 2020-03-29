@@ -21,9 +21,7 @@ public class SeriesController {
     }
 
     @GetMapping("/list")
-    public List<SeriesResource> list(
-            @RequestParam(name = "role", required = false) Long roleId
-    ) {
+    public List<SeriesResource> list() {
         return seriesResourceAssembler.toResources(seriesService.findAll());
     }
 }
