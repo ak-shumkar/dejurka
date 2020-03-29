@@ -8,6 +8,7 @@ import com.apartment.service.location.LocationService;
 import com.querydsl.core.BooleanBuilder;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Objects;
 
 @Service
@@ -55,7 +56,7 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
-    public Iterable<Location> list(Integer level, Integer type, Long parent) {
+    public List<Location> list(Integer level, Integer type, Long parent) {
 
         final QLocation root = QLocation.location;
         final BooleanBuilder builder = new BooleanBuilder();
@@ -68,7 +69,7 @@ public class LocationServiceImpl implements LocationService {
             builder.and(root.parent.id.eq(parent));
 
         if(Objects.nonNull(builder.getValue()))
-            return this.locationRepository.findAll(Objects.requireNonNull(builder.getValue()));
+            return (List<Location>) this.locationRepository.findAll(Objects.requireNonNull(builder.getValue()));
         else
             return this.locationRepository.findAll();
     }
