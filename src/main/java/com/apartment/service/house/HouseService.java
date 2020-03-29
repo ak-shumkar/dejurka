@@ -51,7 +51,10 @@ public class HouseService  {
 
     public House createAndUpdate(HouseDto houseDto,House house){
         Location location = locationService.findById(houseDto.getLocationId());
-        Series series = seriesService.findById(houseDto.getSeriesId());
+        Series series = null;
+        if (houseDto.getSeriesId() != null) {
+            series = seriesService.findById(houseDto.getSeriesId());
+        }
         BeanUtils.copyProperties(houseDto, house,"locationId");
         house.setLocation(location);
         house.setSeries(series);
