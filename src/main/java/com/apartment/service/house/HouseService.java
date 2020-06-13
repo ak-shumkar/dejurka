@@ -65,8 +65,8 @@ public class HouseService  {
         return houseRepository.findById(id).orElse(null);
     }
 
-    public Page<House> findAll(Pageable pageable){
-        return houseRepository.findAll(pageable);
+    public List<House> findAll(){
+        return houseRepository.findAll();
     }
 
     public Page<House> filter(HouseDto houseDto,Pageable pageable){

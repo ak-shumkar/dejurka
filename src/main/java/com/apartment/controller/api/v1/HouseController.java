@@ -60,9 +60,9 @@ public class HouseController {
     }
 
     @GetMapping("/list")
-    public List<HouseResource> list(Pageable pageable) {
+    public List<HouseResource> list() {
 
-        return assembler.toResources(houseService.findAll(pageable));
+        return assembler.toResources(houseService.findAll());
     }
 
     @PostMapping("/filter")
