@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/api/v1/house")
@@ -62,7 +63,7 @@ public class HouseController {
     @GetMapping("/list")
     public List<HouseResource> list() {
 
-        return assembler.toResources(houseService.findAll());
+        return assembler.toResources(houseService.findAll().stream().filter(e -> !e.getHidden()).collect(Collectors.toList()));
     }
 
     @PostMapping("/filter")
@@ -75,7 +76,7 @@ public class HouseController {
     public Boolean delete(
             @RequestParam("id") House house
     ) {
-        this.houseService.delete(house);
+        house.setHidden(true);
         return true;
     }
 }
