@@ -77,6 +77,7 @@ public class HouseController {
             @RequestParam("id") House house
     ) {
         house.setHidden(true);
+        houseService.save(house);
         return true;
     }
 }

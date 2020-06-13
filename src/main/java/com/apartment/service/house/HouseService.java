@@ -124,4 +124,8 @@ public class HouseService  {
         houseRepository.delete(house);
         return true;
     }
+
+    public House save(House house){
+        return houseRepository.save(house);
+    }
 }
