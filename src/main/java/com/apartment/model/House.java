@@ -79,6 +79,9 @@ public class House extends TimedEntity implements Selectable {
     @Column(name = "phone_number")
     private String phoneNumber;
 
+    @Column(name = "hidden")
+    private Boolean hidden;
+
     public House(){
 
     }
