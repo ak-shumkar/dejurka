@@ -63,7 +63,7 @@ public class HouseController {
     @GetMapping("/list")
     public List<HouseResource> list() {
 
-        return assembler.toResources(houseService.findAll().stream().filter(e -> !e.getHidden()).collect(Collectors.toList()));
+        return assembler.toResources(houseService.findAll().stream().filter(e -> e.getHidden() != null &&!e.getHidden()).collect(Collectors.toList()));
     }
 
     @PostMapping("/filter")
